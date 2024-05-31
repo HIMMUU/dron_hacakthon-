@@ -12,7 +12,7 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post('/api/auth/login', formData)
+        axios.post('http://localhost:5000/api/auth/login', formData)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
                 navigate('/dashboard');

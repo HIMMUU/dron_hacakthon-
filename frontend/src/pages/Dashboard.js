@@ -12,9 +12,10 @@ const Dashboard = () => {
     });
 
     useEffect(() => {
-        axios.get('/api/transactions')
+        axios.get('http://localhost:5000/api/transactions')
             .then(res => setTransactions(res.data))
             .catch(err => console.error(err));
+            
     }, []);
 
     const handleChange = e => {
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post('/api/transactions/add', formData)
+        axios.post('http://localhost:5000/api/transactions/add', formData)
             .then(res => {
                 setTransactions([...transactions, res.data]);
                 setFormData({ title: '', amount: '', category: '', sender: '', receiver: '' });

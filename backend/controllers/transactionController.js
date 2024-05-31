@@ -17,6 +17,7 @@ const addTransaction = async (req, res) => {
     const { title, amount, category, sender, receiver } = req.body;
     try {
         const transaction = await Transaction.create({ title, amount, category, sender, receiver });
+        console.log(transaction);
         res.status(201).json(transaction);
     } catch (err) {
         res.status(500).json({ message: 'Server error' });

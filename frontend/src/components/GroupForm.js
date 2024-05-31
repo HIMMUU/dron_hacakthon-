@@ -1,51 +1,55 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const GroupForm = () => {
-    const [formData, setFormData] = useState({ name: '', members: '' });
+const AddGroupForm = () => {
+    const [name, setName] = useState('');
+    const [members, setMembers] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleChange = e => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post('/api/groups/add', {
-            ...formData,
-            members: formData.members.split(',').map(email => email.trim())
-        })
-        .then(res => {
-            setFormData({ name: '', members: '' });
-            // Handle success, e.g., update the group list
-        })
-        .catch(err => console.error(err));
+        try {
+            const response = await axios.post('http://localhost:5000/api/groups/create', {
+                name,
+                members: members.split(',').map(member => member.trim()), // Assuming members are comma-separated
+            });
+            setMessage(response.data.message);
+            setName('');
+            setMembers('');
+        } catch (err) {
+            setMessage(err.response.data.message);
+        }
     };
 
     return (
-        <div className="mb-4">
-            <h2 className="text-xl font-bold mb-2">Create Group</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col">
-                <input 
-                    type="text" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    placeholder="Group Name" 
-                    className="mb-2 p-2 border border-gray-300" 
-                />
-                <input 
-                    type="text" 
-                    name="members" 
-                    value={formData.members}
-                    onChange={handleChange} 
-                    placeholder="Members (comma separated emails)" 
-                    className="mb-2 p-2 border border-gray-300" 
-                />
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Create Group</button>
+        <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+            <h2 className="text-xl font-bold mb-4">Add New Group</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Group Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="members" className="block text-sm font-medium text-gray-700">Members (comma-separated emails):</label>
+                    <input
+                        type="text"
+                        id="members"
+                        value={members}
+                        onChange={(e) => setMembers(e.target.value)}
+                        className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                    />
+                </div>
+                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add Group</button>
             </form>
+            {message && <p className="mt-4 text-sm text-red-600">{message}</p>}
         </div>
-        );
-    };
-    
-    export default GroupForm;
-    
+    );
+};
+
+export default AddGroupForm;

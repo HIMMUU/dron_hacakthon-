@@ -6,7 +6,7 @@ const GroupList = () => {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/groups')
+        axios.get('http://localhost:5000/api/groups')
             .then(res => setGroups(res.data))
             .catch(err => console.error(err));
     }, []);

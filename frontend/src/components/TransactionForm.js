@@ -16,7 +16,7 @@ const TransactionForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post('/api/transactions/add', formData)
+        axios.post('http://localhost:5000/api/transactions/add', formData)
             .then(res => {
                 setFormData({ title: '', amount: '', category: '', sender: '', receiver: '' });
                 // Handle success, e.g., update the transaction list

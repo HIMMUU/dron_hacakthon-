@@ -1,11 +1,20 @@
 const express = require('express');
-const { protect } = require('../middleware/auth');
-const { getGroups, addGroup, getGroupById } = require('../controllers/groupController');
-
+const { getGroups, addGroup, getGroupById, getGroupMembers, addTransaction } = require('../controllers/groupController');
 const router = express.Router();
 
-router.get('/', protect, getGroups);
-router.post('/add', protect, addGroup);
-router.get('/:groupId', protect, getGroupById);
+// Get all groups
+router.get('/', getGroups);
+
+// Add a new group
+router.post('/create', addGroup);
+
+// Get group by ID
+router.get('/:groupId', getGroupById);
+
+// Get all members of a group
+router.get('/:groupId/members', getGroupMembers);
+
+// Add a transaction to a group
+router.post('/:groupId/transactions', addTransaction);
 
 module.exports = router;

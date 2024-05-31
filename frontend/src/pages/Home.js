@@ -3,6 +3,7 @@ import Dashboard from '../components/DashboardMain';
 import ExpenseChart from '../components/ExpenseChart';
 import GroupList from '../components/GroupList';
 import TransactionList from '../components/TransactionList';
+import GroupForm from '../components/GroupForm';
 
 const Home = () => {
   return (
@@ -13,6 +14,11 @@ const Home = () => {
       </div>
       <div className="my-4">
         <GroupList />
+        
+      </div>
+      <div className="my-4">
+        <GroupForm />
+        
       </div>
       <div className="my-4">
         <TransactionList />

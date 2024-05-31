@@ -5,19 +5,19 @@ const TransactionList = () => {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/transactions')
+        axios.get('http://localhost:5000/api/transactions')
             .then(res => setTransactions(res.data))
             .catch(err => console.error(err));
     }, []);
 
     const acceptTransaction = (id) => {
-        axios.put(`/api/transactions/${id}/accept`)
+        axios.put(`http://localhost:5000/api/transactions/${id}/accept`)
             .then(res => setTransactions(transactions.map(transaction => transaction._id === id ? res.data : transaction)))
             .catch(err => console.error(err));
     };
 
     const declineTransaction = (id) => {
-        axios.put(`/api/transactions/${id}/decline`)
+        axios.put(`http://localhost:5000/api/transactions/${id}/decline`)
             .then(() => setTransactions(transactions.filter(transaction => transaction._id !== id)))
             .catch(err => console.error(err));
     };

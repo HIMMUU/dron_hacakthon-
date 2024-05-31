@@ -9,7 +9,7 @@ const SplitExpenses = () => {
     const [selectedMembers, setSelectedMembers] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/groups/${groupId}`)
+        axios.get(`http://localhost:5000/api/groups/${groupId}`)
             .then(res => setMembers(res.data.members))
             .catch(err => console.error(err));
     }, [groupId]);
@@ -31,7 +31,7 @@ const SplitExpenses = () => {
         if (amount === '' || selectedMembers.length === 0) return;
         const splitAmount = amount / selectedMembers.length;
         selectedMembers.forEach(member => {
-            axios.post(`/api/groups/${groupId}/transactions/add`, {
+            axios.post(`http://localhost:5000/api/groups/${groupId}/transactions/add`, {
                 title: 'Split Expense',
                 amount: splitAmount,
                 category: 'Shared',
