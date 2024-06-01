@@ -18,8 +18,8 @@ const GroupList = () => {
                 {groups.map(group => (
                     <div key={group._id} className="border p-4 mb-2">
                         <p><strong>Name:</strong> {group.name}</p>
-                        <p><strong>Members:</strong> {group.members.join(', ')}</p>
-                        <Link to={`/groups/${group._id}`} className="text-blue-500">View Group</Link>
+                        <p><strong>Members:</strong> {group.members.join(',')}</p>
+                        <Link to={`/groups/${group._id}/IdGroup`} className="text-blue-500">View Group</Link>
                     </div>
                 ))}
             </div>

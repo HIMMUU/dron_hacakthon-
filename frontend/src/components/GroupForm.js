@@ -9,15 +9,19 @@ const AddGroupForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (!name.trim()) {
+                setMessage('Group name cannot be empty');
+                return;
+            }
             const response = await axios.post('http://localhost:5000/api/groups/create', {
                 name,
-                members: members.split(',').map(member => member.trim()), // Assuming members are comma-separated
+                members: members.split(',').map(member => member.trim()), // Assuming members are comma-separated usernames
             });
             setMessage(response.data.message);
             setName('');
             setMembers('');
         } catch (err) {
-            setMessage(err.response.data.message);
+            setMessage(err.response?.data?.message || 'Server error');
         }
     };
 
@@ -33,16 +37,18 @@ const AddGroupForm = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                        required
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="members" className="block text-sm font-medium text-gray-700">Members (comma-separated emails):</label>
+                    <label htmlFor="members" className="block text-sm font-medium text-gray-700">Members (comma-separated usernames):</label>
                     <input
                         type="text"
                         id="members"
                         value={members}
                         onChange={(e) => setMembers(e.target.value)}
                         className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+                        required
                     />
                 </div>
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add Group</button>

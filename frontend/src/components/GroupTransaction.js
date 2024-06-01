@@ -9,7 +9,7 @@ const GroupTransactions = () => {
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
-                const res = await axios.get(`/api/groups/transactions/${groupId}`);
+                const res = await axios.get(`/api/groups/${groupId}/transactions`);
                 setTransactions(res.data);
             } catch (err) {
                 console.error(err);

@@ -9,9 +9,7 @@ const Home = () => {
   return (
     <div className="container mx-auto p-4">
       <Dashboard />
-      <div className="my-4">
-        <ExpenseChart />
-      </div>
+     
       <div className="my-4">
         <GroupList />
         

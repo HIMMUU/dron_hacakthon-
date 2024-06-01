@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
-const GroupTransactionSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+const TransactionSchema = new mongoose.Schema({
+    sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    receivers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
     amount: { type: Number, required: true },
-    group: { type: mongoose.Schema.Types.ObjectId, ref: 'Group', required: true },
-    payer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    payees: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    category: { type: String, required: true },
+    title: { type: String, required: true },
+     groupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Group', required: false }
 });
 
-module.exports = mongoose.model('GroupTransaction', GroupTransactionSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);

@@ -4,12 +4,13 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import DashboardMain from './components/DashboardMain';
 import GroupForm from './components/GroupForm';
-import GroupTransactions from './components/GroupTransaction';
+// import GroupTransactions from './components/GroupTransaction';
 import SplitExpenses from './components/SplitExpenses';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Group from './pages/Group';
 import GroupTransactionForm from './components/GroupTransactionForm';
+import IdGroup from './components/IdGroup';
 const App = () => {
     return (
         <Router>
@@ -20,7 +21,7 @@ const App = () => {
                     <Route path="/dashboard" element={<DashboardMain />} />
                     <Route path="/groups" element={<Group />} />
                     <Route path="/groups/new" element={<GroupForm />} />
-                    <Route path="/groups/:groupId" element={<GroupTransactions />} /> {/* Updated route */}
+                    <Route path="/groups/:groupId/IdGroup" element={<IdGroup/>} /> {/*keander Updated route */}
                     <Route path="/groups/:groupId/transactions" element={<GroupTransactionForm />} /> {/* New route */}
                     <Route path="/groups/:groupId/split" element={<SplitExpenses />} />
                     <Route path="/login" element={<Login />} />

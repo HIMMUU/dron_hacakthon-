@@ -60,8 +60,39 @@ app.use('/api/auth', authRoutes);
 app.use('/api/groups', groupRoutes);
 app.use('/api/transactions', transactionRoutes);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Error handling middleware
 app.use(errorHandler);
+// Fetch members
+
+
+// Delete transaction
+app.delete('/api/transactions/:id', async (req, res) => {
+  await Transaction.findByIdAndDelete(req.params.id);
+  res.json({ message: 'Transaction deleted' });
+});
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
